@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS Horologe</title>
+
+    <style>
+      :root {
+        --color-bg: #fff;
+        --color-fg: #000;
+      }
+
+      @keyframes move-tape {
+        to {
+          transform: translateY(-100%);
+        }
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        height: 100dvh;
+      }
+
+      html {
+        font-size: 100%;
+      }
+      
+      body {
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: monospace;
+        font-size: 1rem;
+        background-color: var(--color-bg);
+        color: var(--color-fg);
+      }
+
+      .clock {
+        display: flex;
+        align-items: flex-start;
+        border: 1px solid;
+        height: 1lh;
+      }
+
+      .clock__display {
+        display: flex;
+        align-items: flex-start;
+      }
+
+      .clock__display + .clock__display::before {
+        content: ":";
+      }
+
+      .clock__tape {
+        animation: move-tape var(--duration) steps(var(--steps), end) infinite;
+      }
+
+      .clock__tape--hours-tenth {
+        --duration: 360000s;
+        --steps: 3;
+      }
+
+      .clock__tape--hours-single {
+        --duration: 36000s;
+        --steps: 24;
+      }
+
+      .clock__tape--minutes-tenth {
+        --duration: 3600s;
+        --steps: 6;
+      }
+
+      .clock__tape--minutes-single {
+        --duration: 600s;
+        --steps: 10;
+      }
+
+      .clock__tape--seconds-tenth {
+        --duration: 60s;
+        --steps: 6;
+      }
+
+      .clock__tape--seconds-single {
+        --duration: 10s;
+        --steps: 10;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="clock">
+      <div class="clock__display">
+        <div class="clock__tape clock__tape--hours-tenth">
+          <div class="clock__value">0</div>
+          <div class="clock__value">1</div>
+          <div class="clock__value">2</div>
+        </div>
+        <div class="clock__tape clock__tape--hours-single">
+          <div class="clock__value">0</div>
+          <div class="clock__value">1</div>
+          <div class="clock__value">2</div>
+          <div class="clock__value">3</div>
+          <div class="clock__value">4</div>
+          <div class="clock__value">5</div>
+          <div class="clock__value">6</div>
+          <div class="clock__value">7</div>
+          <div class="clock__value">8</div>
+          <div class="clock__value">9</div>
+        </div>
+      </div>
+      <div class="clock__display">
+        <div class="clock__tape clock__tape--minutes-tenth">
+          <div class="clock__value">0</div>
+          <div class="clock__value">1</div>
+          <div class="clock__value">2</div>
+          <div class="clock__value">3</div>
+          <div class="clock__value">4</div>
+          <div class="clock__value">5</div>
+        </div>
+        <div class="clock__tape clock__tape--minutes-single">
+          <div class="clock__value">0</div>
+          <div class="clock__value">1</div>
+          <div class="clock__value">2</div>
+          <div class="clock__value">3</div>
+          <div class="clock__value">4</div>
+          <div class="clock__value">5</div>
+          <div class="clock__value">6</div>
+          <div class="clock__value">7</div>
+          <div class="clock__value">8</div>
+          <div class="clock__value">9</div>
+        </div>
+      </div>
+      <div class="clock__display">
+        <div class="clock__tape clock__tape--seconds-tenth">
+          <div class="clock__value">0</div>
+          <div class="clock__value">1</div>
+          <div class="clock__value">2</div>
+          <div class="clock__value">3</div>
+          <div class="clock__value">4</div>
+          <div class="clock__value">5</div>
+        </div>
+        <div class="clock__tape clock__tape--seconds-single">
+          <div class="clock__value">0</div>
+          <div class="clock__value">1</div>
+          <div class="clock__value">2</div>
+          <div class="clock__value">3</div>
+          <div class="clock__value">4</div>
+          <div class="clock__value">5</div>
+          <div class="clock__value">6</div>
+          <div class="clock__value">7</div>
+          <div class="clock__value">8</div>
+          <div class="clock__value">9</div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
