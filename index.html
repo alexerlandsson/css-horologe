@@ -11,12 +11,6 @@
         --color-fg: #000;
       }
 
-      @keyframes move-tape {
-        to {
-          transform: translateY(-100%);
-        }
-      }
-
       *,
       *::before,
       *::after {
@@ -55,44 +49,55 @@
         align-items: flex-start;
       }
 
-      .clock__display + .clock__display::before {
+      .clock__display:not(:has(.clock__tape--period)) + .clock__display::before {
         content: ":";
+      }
+
+      .clock__display:has(.clock__tape--period)::after {
+        content: "-";
+      }
+
+      @keyframes transform-tape {
+        to {
+          transform: translateY(-100%);
+        }
       }
 
       .clock__tape {
         /* Modifier to speed up the animation (debug) */
         --duration-modifier: 1;
 
-        animation: move-tape var(--duration) steps(var(--steps), end) infinite;
+        animation: transform-tape calc(var(--duration) / var(--duration-modifier)) calc(var(--default-offset, var(--offset, 0s)) / var(--duration-modifier)) steps(var(--steps), end) infinite;
       }
 
       .clock__tape--period {
-        --duration: calc(86400s / var(--duration-modifier));
+        --duration: 86400s;
         --steps: 2;
       }
 
       .clock__tape--hours {
-        --duration: calc(43200s / var(--duration-modifier));
+        --duration: 43200s;
         --steps: 12;
+        --default-offset: -39600s;
       }
 
       .clock__tape--minutes-tenth {
-        --duration: calc(3600s / var(--duration-modifier));
+        --duration: 3600s;
         --steps: 6;
       }
 
       .clock__tape--minutes-single {
-        --duration: calc(600s / var(--duration-modifier));
+        --duration: 600s;
         --steps: 10;
       }
 
       .clock__tape--seconds-tenth {
-        --duration: calc(60s / var(--duration-modifier));
+        --duration: 60s;
         --steps: 6;
       }
 
       .clock__tape--seconds-single {
-        --duration: calc(10s / var(--duration-modifier));
+        --duration: 10s;
         --steps: 10;
       }
     </style>
@@ -107,7 +112,6 @@
       </div>
       <div class="clock__display">
         <div class="clock__tape clock__tape--hours">
-          <div class="clock__value">12</div>
           <div class="clock__value">01</div>
           <div class="clock__value">02</div>
           <div class="clock__value">03</div>
@@ -119,6 +123,7 @@
           <div class="clock__value">09</div>
           <div class="clock__value">10</div>
           <div class="clock__value">11</div>
+          <div class="clock__value">12</div>
         </div>
       </div>
       <div class="clock__display">
