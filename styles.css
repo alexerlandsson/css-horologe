@@ -1,0 +1,123 @@
+:root {
+  --color-bg: #ccc;
+  --color-fg: #000;
+  --color-clock-bg: #fff;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100dvh;
+}
+
+html {
+  font-size: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  font-family: monospace;
+  font-size: 1rem;
+  background-color: var(--color-bg);
+  color: var(--color-fg);
+}
+
+.header {
+  flex-shrink: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.header__title {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.main {
+  flex: 1 1 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.clock {
+  display: flex;
+  align-items: flex-start;
+  border: 0.0625rem solid;
+  height: 1lh;
+  background-color: var(--color-clock-bg);
+}
+
+.clock__display {
+  display: flex;
+  align-items: flex-start;
+}
+
+.clock__display:not(:has(.clock__tape--period))
+  + .clock__display::before {
+  content: ":";
+}
+
+.clock__display:has(.clock__tape--period)::after {
+  content: "-";
+}
+
+@keyframes transform-tape {
+  to {
+    transform: translateY(-100%);
+  }
+}
+
+.clock__tape {
+  /* Modifier to speed up the animation (debug) */
+  --duration-modifier: 1;
+
+  animation: transform-tape
+    calc(var(--duration) / var(--duration-modifier))
+    calc(
+      var(--offset, var(--default-offset, 0s)) / var(--duration-modifier)
+    )
+    steps(var(--steps), end) infinite;
+}
+
+.clock__tape--period {
+  --duration: 86400s;
+  --steps: 2;
+}
+
+.clock__tape--hours {
+  --duration: 43200s;
+  --steps: 12;
+  --default-offset: -39600s;
+}
+
+.clock__tape--minutes-tenth {
+  --duration: 3600s;
+  --steps: 6;
+}
+
+.clock__tape--minutes-single {
+  --duration: 600s;
+  --steps: 10;
+}
+
+.clock__tape--seconds-tenth {
+  --duration: 60s;
+  --steps: 6;
+}
+
+.clock__tape--seconds-single {
+  --duration: 10s;
+  --steps: 10;
+}
