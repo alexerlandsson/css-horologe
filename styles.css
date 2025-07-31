@@ -1,7 +1,16 @@
+@font-face {
+  font-family: "DSEG Classic Bold";
+  src: url("assets/font/DSEG7Classic-Bold.woff2") format("woff2"),
+       url("assets/font/DSEG7Classic-Bold.woff") format("woff");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --color-bg: #ccc;
   --color-fg: #000;
-  --color-clock-bg: #fff;
+  --color-clock-bg: #cbcaa7;
 }
 
 *,
@@ -26,6 +35,7 @@ body {
   flex-direction: column;
   font-family: monospace;
   font-size: 1rem;
+  line-height: 1.5;
   background-color: var(--color-bg);
   color: var(--color-fg);
 }
@@ -40,7 +50,7 @@ body {
 
 .header__title {
   margin: 0;
-  font-size: 1rem;
+  font-size: 1.25rem;
   font-weight: 400;
 }
 
@@ -52,11 +62,25 @@ body {
 }
 
 .clock {
+  position: relative;
   display: flex;
   align-items: flex-start;
-  border: 0.0625rem solid;
   height: 1lh;
   background-color: var(--color-clock-bg);
+  font-size: 1.25rem;
+  border: 0.125em solid;
+  border-radius: 0.25em;
+  font-family: "DSEG Classic Bold", monospace;
+  box-sizing: content-box;
+  isolation: isolate;
+
+  &::before {
+    content: "8-88:88:88";
+    position: absolute;
+    inset: 0;
+    opacity: 0.15;
+    z-index: -1;
+  }
 }
 
 .clock__display {
@@ -120,4 +144,45 @@ body {
 .clock__tape--seconds-single {
   --duration: 10s;
   --steps: 10;
+}
+
+abbr.clock__value {
+  display: block;
+  text-decoration: none;
+}
+
+.button {
+  --_bg: #f04425;
+  --_bg-hover: #e33c1e;
+  --_outline: #944219;
+  --_travel: 0.25em;
+
+  background-color: var(--_bg);
+  color: white;
+  font-size: 0.875rem;
+  padding: 0.5em 1em;
+  border: 0.15em solid var(--_outline);
+  box-shadow: var(--_outline) 0px var(--_travel) 0px 0px;
+  border-radius: 100vmax;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-family: monospace;
+  cursor: pointer;
+
+  &:active {
+    box-shadow: none;
+    transform: translateY(var(--_travel));
+  }
+
+  &:hover {
+    background-color: var(--_bg-hover);
+  }
+}
+
+.button:disabled {
+  --_bg: #808080;
+  --_bg-hover: #707070;
+  --_outline: #3c3c3c;
+
+  cursor: not-allowed;
 }
