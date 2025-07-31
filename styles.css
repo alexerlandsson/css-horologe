@@ -1,5 +1,5 @@
 @font-face {
-  font-family: "DSEG Classic Bold";
+  font-family: "DSEG7 Classic Bold";
   src: url("assets/font/DSEG7Classic-Bold.woff2") format("woff2"),
        url("assets/font/DSEG7Classic-Bold.woff") format("woff");
   font-weight: bold;
@@ -43,15 +43,20 @@ body {
 .header {
   flex-shrink: 0;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   gap: 1rem;
 }
 
 .header__title {
-  margin: 0;
-  font-size: 1.25rem;
-  font-weight: 400;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
 }
 
 .main {
@@ -70,7 +75,7 @@ body {
   font-size: 1.25rem;
   border: 0.125em solid;
   border-radius: 0.25em;
-  font-family: "DSEG Classic Bold", monospace;
+  font-family: "DSEG7 Classic Bold", monospace;
   box-sizing: content-box;
   isolation: isolate;
 
